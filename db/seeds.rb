@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+1000.times do
+  Question.create title: Faker::Hacker.say_something_smart,
+                  body:  Faker::Hipster.paragraph,
+                  view_count: rand(1000)
+end
+
+puts Cowsay.say 'created 1000 questions', :cow
