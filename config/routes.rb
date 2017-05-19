@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :questions
+  # get('/questions/new', { to: 'questions#new', as: :new_question })
+  # post('/questions', { to: 'questions#create', as: :questions })
+  # get('/questions/:id', { to: 'questions#show', as: :question })
+  # get('/questions', { to: 'questions#index' })
+  # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
+  # patch('/questions/:id', { to: 'questions#update' })
+  # delete('/questions/:id', { to: 'questions#destroy' })
+
   # the order in the routes.rb file is important, it's basically first come
   # first served which means the first URL that matches your request will be the
   # one that will get used.

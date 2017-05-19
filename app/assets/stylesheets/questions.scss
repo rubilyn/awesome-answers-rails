@@ -1,0 +1,30 @@
+// Place all the styles related to the questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.field_with_errors input,
+.field_with_errors textarea {
+  border-color: red;
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url(https://fonts.googleapis.com/css?family=Montserrat);
+}
+
+html {
+	 background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAERJREFUGBljYKApOPzpnQ8IY7OEEVkQmyJbPqEtyGoYsJmGrJEJWTWGbiRJsEJknUhyKExGmCJspsHkwDpQOChmkMkBAJo0IJDSQ0khAAAAAElFTkSuQmCC) repeat; 
+  padding-top: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+	color: #404040;
+  // color: #5FC8D7;
+    font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 5px
+}
+
+a {
+// 	color: #5FC8D7;
+}
