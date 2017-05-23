@@ -1,0 +1,164 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+ @font-face {
+    font-family: Montserrat;
+    src: url(https://fonts.googleapis.com/css?family=Montserrat);
+}
+
+
+.bodydiv{
+	background-color: transparent;
+	color: #636363 !important;
+	font-size: 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+}
+
+.container > h1 {
+	margin-top: 5% !important;
+}
+
+.navbar {
+	padding-top: 20px;
+    margin-bottom: 0;
+}
+
+
+.navbar-default{
+// 	background-color: transparent;
+
+   background: rgba(81, 188, 208, 0.3);
+
+    border-color: transparent;
+    padding-bottom: 15px;
+
+}
+.navbar img {
+  margin-left: 20px;
+  padding-top: 15px;
+  height: 50px;
+  width: 50px;
+  padding-bottom: 0 !important; 
+}
+
+
+
+.container > h1 {
+  text-align: center;
+  margin-top: 20%;
+}
+
+#name,
+#message{
+    border: 1px solid #bbbbbb;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 3px;
+	width: 100%;;
+}
+
+.form-control{
+	border: 1px solid #bbbbbb;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.submit {
+  margin-bottom: 20px;
+}
+
+
+html {
+    color: #08556f;
+    background: #FFF
+}
+
+h1 {
+    font-family: montserrat;
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 20px
+}
+h2 {
+	color: #08556f;
+    font-size: 40px;
+    font-family: montserrat;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px
+}
+.h2 a {
+    text-decoration: none;
+    color: #000
+}
+h3 {
+	color: #08556f;
+    font-size: 22px;
+    font-family: montserrat;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 5px
+}
+h4 {
+    color: #08556f;
+    font-size: 18px;
+    font-family: montserrat;
+      font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px
+}
+h5 {
+	color: #08556f !important;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: montserrat;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: #555
+}
+h6 {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: montserrat;
+    line-height: 1.4;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #555
+}
+p {
+	font-size: 12px;
+    font-weight: 400;
+    font-family: montserrat;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: #555
+}
+
+
+.btn {
+    display: inline-block;
+//     background: 0 0;
+    background: rgba(81, 188, 208, 0.3);
+    border: 1px solid rgba(0, 0, 0, .3);
+    padding: 13px 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    letter-spacing: .5px;
+    border-radius: 40px;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    color: #252525;
+}
+hr{
+	color: transparent !important;
+	padding: 0px;
+	margin-top: 4px;
+    margin-bottom: 0px;
+
+}

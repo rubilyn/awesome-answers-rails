@@ -13,12 +13,15 @@
     <%# this f.text_field will generate an `input` HTML tag with the proper
         `name` attribute which will be `question[title]` in this case. It will
         also set the value to the input field to whatever the @question object
-        has preset for that perticular attribute (in this title) %>
+        has preset for that particular attribute (in this title) %>
     <%= f.text_field :title, class: 'form-control' %>
   </div>
-  <div class="form-control">
+  <br/>
+  
+  <div class="form-group">
     <%= f.label :body %>
     <%= f.text_area :body, class: 'form-control' %>
   </div>
+  <br />
   <%= f.submit class: 'btn btn-primary' %>
 <% end %>

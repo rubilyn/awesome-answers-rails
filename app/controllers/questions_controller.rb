@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
   end
-
   # The create action is usually used to handle form submission from the new
   # action to create a record (question in this case) in the database.
   # URL: /questions
@@ -24,19 +23,15 @@ class QuestionsController < ApplicationController
       render :new
     end
   end
-
   def show
     @question = Question.find params[:id]
   end
-
   def index
     @questions = Question.recent(30)
   end
-
   def edit
     @question = Question.find params[:id]
   end
-
   def update
     @question = Question.find params[:id]
     question_params = params.require(:question).permit([:title, :body])
@@ -46,13 +41,11 @@ class QuestionsController < ApplicationController
       render :edit
     end
   end
-
   def destroy
     q = Question.find params[:id]
     q.destroy
     redirect_to questions_path
   end
-
 end
 ##################
 # class QuestionsController < ApplicationController
