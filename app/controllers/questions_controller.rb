@@ -42,6 +42,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answer = Answer.new
+    @answers = @question.answers.order(created_at: :desc)
   end
 
   def index
@@ -79,7 +81,6 @@ class QuestionsController < ApplicationController
   end
 
 end
-
 ##################
 # class QuestionsController < ApplicationController
 #   # the New action is usuaully used to show a form that will be used to create

@@ -7,3 +7,56 @@
 <%= link_to 'Delete', question_path(@question),
                       method: :delete,
                       data: { confirm: 'Are you sure?' } %>
+
+<h2>Answers</h2>
+
+<%= @answer.errors.full_messages.join(', ') %>
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>
+
+<% @answers&.each do |answer| %>
+  <div>
+    <p><%= answer.body %></p>
+    <%= link_to '🗑',
+      [@question, answer],
+      method: :delete,
+      data: { confirm: 'Are you sure?'}
+      %>
+    <br />
+    <br />
+    <hr />
+  </div>
+<% end %>
+
+
+
+
+<!-- -->
+
+<!--
+<h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<%= link_to 'Edit', edit_question_path(@question) %>
+
+<%# when you use `method: :delete`. Rails will use Javascript to mimick a
+    delete request to the server %>
+<%= link_to 'Delete', question_path(@question),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' } %>
+
+<h2>Answers</h2>
+
+<%= @answer.errors.full_messages.join(', ') %>
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>
+
+<% @question.answers.each do |answer| %>
+  <div>
+    <p><%= answer.body %></p>
+    <hr />
+  </div>
+<% end %> -->

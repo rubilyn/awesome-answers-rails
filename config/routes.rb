@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
 
-  resources :questions
+
+  # /questions/5/answers <- POST
+  # /questions/5/answers <- GET
+
+  resources :questions do
+    resources :answers, only: [:create, :destroy]
+    # adds the following nested routes
+    # /questions/:question_id/answers VERB: post
+    # /questions/:question_id/answers/:id VERB: delete
+  end
+  # resources :questions, only: [:new, :create]
+  # resources :questions, except: [:edit, :update
+
   # get('/questions/new', { to: 'questions#new', as: :new_question })
   # post('/questions', { to: 'questions#create', as: :questions })
   # get('/questions/:id', { to: 'questions#show', as: :question })
@@ -33,6 +45,5 @@ Rails.application.routes.draw do
   # blocks are defined in Ruby for a speicifc purpose (in this case defining
   # routes)
 
-  # For details on the DSL available within this file,
-  # see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
