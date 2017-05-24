@@ -2,6 +2,10 @@
 # uses the pluralized version of the class name.
 # Also, Rails will give you attribute accessor to all the columns of the table.
 class Question < ApplicationRecord
+  belongs_to :category, optional: true
+  # by default belongs_to adds a validation to verify that
+  # the association exists
+  # validates :category_id, presence: true
 
   # It's highly recommend that you add the `dependent` option to
   # the association which tells Rails what to do when you delete a

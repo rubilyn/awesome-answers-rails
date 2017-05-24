@@ -5,7 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-200.times do
+Category.destroy_all
+Answer.destroy_all
+Question.destroy_all
+
+Category.create([
+  {name: 'Science'},
+  {name: 'Music'},
+  {name: 'Arts'},
+  {name: 'Memes'},
+  {name: 'Literature'},
+  {name: 'Programming'}
+])
+
+
+100.times do
   Question.create title: Faker::Hacker.say_something_smart,
                   body:  Faker::Hipster.paragraph,
                   view_count: rand(1000)

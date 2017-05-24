@@ -1,5 +1,7 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
+<p><strong>Category:</strong> <%= @question.category&.name %></p>
+
 <%= link_to 'Edit', edit_question_path(@question) %>
 
 <%# when you use `method: :delete`. Rails will use Javascript to mimick a
@@ -24,11 +26,10 @@
       method: :delete,
       data: { confirm: 'Are you sure?'}
       %>
-    <br />
-    <br />
     <hr />
   </div>
 <% end %>
+
 
 
 
