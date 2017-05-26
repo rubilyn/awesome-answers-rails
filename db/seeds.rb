@@ -9,6 +9,10 @@ Category.destroy_all
 Answer.destroy_all
 Question.destroy_all
 
+
+PASSWORD = 'pass123'
+
+
 Category.create([
   {name: 'Science'},
   {name: 'Music'},
@@ -17,6 +21,12 @@ Category.create([
   {name: 'Literature'},
   {name: 'Programming'}
 ])
+
+User.create([
+  {first_name: 'Jon', last_name: 'Snow', email: 'js@js.com', password: PASSWORD},
+  {first_name: 'Daenarys', last_name: 'Targaryan', email: 'daeny@dragon.com', password: PASSWORD},
+  {first_name: 'Cersei', last_name: 'Lannister', email: 'cl@iron.throne', password: PASSWORD}
+  ])
 
 
 100.times do

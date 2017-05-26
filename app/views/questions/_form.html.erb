@@ -51,13 +51,14 @@
       </div>
       <br />
       <div>
-        <%= f.label :category %>
+        <%= f.label :category, class: 'category_label'%>
         <%= f.collection_select :category_id,
           Category.all,
           :id, # this represent the method that is used for the option tag's value
           :name, # this repesents the method that is used for the option tag's text
           include_blank: true,
-          prompt: ' Choose a category!  '
+          prompt: ' Choose a category!  ',
+          class: 'category_selections form-control'
           %>
       </div>
       <br/>
