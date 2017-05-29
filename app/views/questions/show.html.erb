@@ -1,6 +1,56 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
 <p><strong>Category:</strong> <%= @question.category&.name %></p>
+<p><strong>Author:</strong> <%= @question.user&.full_name %></p>
+
+<!-- <% if user_signed_in? && (@question.user == current_user) %> -->
+<% if user_signed_in? %>
+ <% if can? :edit, @question %>
+    <%= link_to 'Edit', edit_question_path(@question) %>
+ <end>
+  <%# when you use `method: :delete`. Rails will use Javascript to mimick a
+    delete request to the server %>
+
+    <%# can? is a helper method available in the controller and views.
+    This method came from the cancancan gem and it uses ability.rb %>
+  <% if can? :destroy, @question %>
+      <%= link_to 'Delete', question_path(@question),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
+
+
+<h2>Answers</h2>
+
+<% if user_signed_in? %>
+  <%= @answer.errors.full_messages.join(', ') %>
+  <%= form_for [@question, @answer] do |f| %>
+    <%= f.text_area :body %>
+    <%= f.submit %>
+  <% end %>
+<% end %>
+
+<% @answers&.each do |answer| %>
+  <div>
+    <p><%= answer.body %></p>
+    <%= link_to 'ð',
+      [@question, answer],
+      method: :delete,
+      data: { confirm: 'Are you sure?'}
+      %>
+    <hr />
+  </div>
+<% end %>
+
+
+
+
+<!-- <h1><%= @question.title %></h1>
+<p><%= @question.body %></p>
+<p><strong>Category:</strong> <%= @question.category&.name %></p>
+<p><strong>Author:</strong> <%= @question.user&.full_name %></p>
 
 <%= link_to 'Edit', edit_question_path(@question) %>
 
@@ -28,7 +78,7 @@
       %>
     <hr />
   </div>
-<% end %>
+<% end %> -->
 
 
 

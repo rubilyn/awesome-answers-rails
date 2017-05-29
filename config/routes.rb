@@ -2,7 +2,14 @@ Rails.application.routes.draw do
 
 
   get 'sessions/new'
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create] do
+    # when you define a route with `on: :collection` option,
+    # it skips requiring an :id
+    delete :destroy, on: :collection
+  end
+
+
+
   resources :users, only: [:new, :create]
 
   # /questions/5/answers <- POST

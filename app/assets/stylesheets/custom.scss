@@ -39,7 +39,7 @@
   padding-top: 15px;
   height: 50px;
   width: 50px;
-  padding-bottom: 0 !important; 
+  padding-bottom: 0 !important;
 }
 
 
@@ -85,14 +85,14 @@ html {
 h1 {
     font-family: montserrat;
     font-weight: 700;
-    font-size: 60px;
+    font-size: 40px;
     line-height: 1.15;
     letter-spacing: -1px;
     margin-bottom: 20px
 }
 h2 {
 	color: #08556f;
-    font-size: 40px;
+    font-size: 30px;
     font-family: montserrat;
     font-weight: 700;
     line-height: 1.4;
@@ -148,7 +148,6 @@ p {
 
 .btn {
     display: inline-block;
-//     background: 0 0;
     background: rgba(222, 175, 164, 0.5);
     border: 1px solid rgba(0, 0, 0, .3);
     padding: 13px 25px;
@@ -167,6 +166,6 @@ hr{
 	color: transparent !important;
 	padding: 0px;
 	margin-top: 4px;
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 
 }

@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   # `before_action` takes it a block or a symbol that refers to a method. The
   # block or the method will be executed just before the action. This will
   # happen within the same request/response cycle which means that defined
@@ -22,6 +23,8 @@ class QuestionsController < ApplicationController
   # VERB: POST
   def create
     @question = Question.new question_params
+    # @question.user_id = session[:user_id]
+    @question.user = current_user
     if @question.save
       # redirect_to question_path({ id: @question.id })
       # redirect_to question_path({ id: @question })
@@ -51,10 +54,21 @@ class QuestionsController < ApplicationController
   end
 
   def edit
+
+    #head will send an empty HTTP response with a specific code, in this case the cose is 401 :unauthorized)
+    # head :unauthorized unless @question.user == user
+    #billpatriamarkos.me/blog list of rails status code symbols
+    head :unauthorized unless can? :edit, @question
   end
 
   def update
-    if @question.update(question_params)
+    if !(can? :update, @question)
+      head :unauthorized
+    elsif @question.update(question_params)
+
+    # :unauthorized unless @question.user == user
+    # :unauthorized unless can? :update, @question
+    # if @question.update(question_params)
       # if you have a `redirect_to` and you'd like to specify a flash message
       # then you can just pass in the `flash` or `alert` as options to the
       # `redirect_to` instead of having a separate line. Please note that this
@@ -66,8 +80,12 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy
-    redirect_to questions_path, notice: 'Question deleted'
+    if can? :destroy, @question
+      @question.destroy
+      redirect_to questions_path, notice: 'Question deleted'
+    else
+      head :unauthorized
+    end
   end
 
   private

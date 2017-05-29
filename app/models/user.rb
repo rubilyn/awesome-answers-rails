@@ -6,6 +6,12 @@ class User < ApplicationRecord
   # 2. When given a password, it will generate a salt, then it will hash
   #    the salt and password combo then store the rsult into the database
   #    field (using the gem `bcrypt`)
+  # 3. If you skip `password_confirmation` field, then it won't give you
+  #    a validation error for that. If you providate a `password_confirmation`,
+  #   it will validate the password against it
+  # 4. The user instance gets the method `authenticate` which will allow
+  #    to verify if a user entered a the correct password. It returns the user
+  #    if correct otherwise it returns `nil`
   has_secure_password
 
   validates :first_name, presence: true
@@ -13,6 +19,20 @@ class User < ApplicationRecord
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true,
-             uniqueness: { case_sensitive: false },
-             format: VALID_EMAIL_REGEX
+                    uniqueness: { case_sensitive: false },
+                    format: VALID_EMAIL_REGEX
+
+  before_validation :downcase_email
+
+  has_many :questions, dependent: :nullify
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def downcase_email
+    self.email&.downcase!
+  end
 end
