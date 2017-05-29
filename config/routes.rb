@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
-
-
   get 'sessions/new'
+
+  # when you put routes in Rails within a `namespace` all the urls/paths will be
+  # prepended with `/` + the namespace so in this example all the routes defined
+  # within will be prepended with `/admin`. Also when you defined `resources`
+  # inside, it will look for the corresponding controllers in a subfolder that
+  # matches the namespace you provided, so in this case Rails will look for
+  # UsersController defined within the `admin` folder.
+  namespace :admin do
+    resources :users, only: :index
+  end
+
   resources :sessions, only: [:new, :create] do
     # when you define a route with `on: :collection` option,
     # it skips requiring an :id
     delete :destroy, on: :collection
   end
-
-
-
   resources :users, only: [:new, :create]
 
   # /questions/5/answers <- POST
@@ -58,7 +64,6 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
-
 
 
 #
