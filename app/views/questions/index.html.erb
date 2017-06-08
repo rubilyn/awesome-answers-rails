@@ -1,8 +1,10 @@
-<h1>All Questions</h1>
+<% if @user %>
+  <h1><%= @user.first_name %>'s Liked Questions</h1>
+<% else %>
+  <h1>All Questions</h1>
+<% end %>
 
 <% @questions.each do |question| %>
   <%= link_to question.title, question_path(question) %>
-  <br/>
-  <br/>
-
+  <hr>
 <% end %>

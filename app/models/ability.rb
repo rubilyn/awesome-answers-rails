@@ -31,6 +31,13 @@ class Ability
       question.user == user
     end
 
+  can :like, Question do |question|
+    question.user != user
+  end
+
+  cannot :like, Question do |question|
+    question.user == user
+  end
     #   user ||= User.new # guest user (not logged in)
     #   if user.admin?
     #     can :manage, :all

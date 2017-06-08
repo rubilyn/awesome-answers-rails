@@ -27,6 +27,7 @@ class QuestionsController < ApplicationController
     @question.user = current_user
     if @question.save
       QuestionReminderJob.set(wait: 5.days).perform_later(@question.id)
+
       # redirect_to question_path({ id: @question.id })
       # redirect_to question_path({ id: @question })
 
@@ -46,19 +47,34 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @like = @question.likes.find_by(user: current_user)
     @answer = Answer.new
     @answers = @question.answers.order(created_at: :desc)
   end
 
+  # in this version: if user doesnt exist, it will show all questions------> so wrong
+  # def index
+  #   @user = User.find_by(id: params[:user_id])
+  #   if @user
+  #     @questions = @user.liked_questions.order(created_at: :desc)
+  #   else
+  #     @questions = Question.recent(30)
+  #   end
+  # end
+
   def index
-    @questions = Question.recent(30)
+    if params.has_key? :user_id
+      @user = User.find(params[:user_id])
+      @questions = @user.liked_questions.order(created_at: :desc)
+    else
+      @questions = Question.recent(30)
+    end
   end
 
   def edit
-
-    #head will send an empty HTTP response with a specific code, in this case the cose is 401 :unauthorized)
-    # head :unauthorized unless @question.user == user
-    #billpatriamarkos.me/blog list of rails status code symbols
+    # head will send an empty HTTP response with a specific code, in this case
+    # the code is 401 (:unauthorized), to see a list of available codes in Rails
+    # you can visit: http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
     head :unauthorized unless can? :edit, @question
   end
 
@@ -66,10 +82,6 @@ class QuestionsController < ApplicationController
     if !(can? :update, @question)
       head :unauthorized
     elsif @question.update(question_params)
-
-    # :unauthorized unless @question.user == user
-    # :unauthorized unless can? :update, @question
-    # if @question.update(question_params)
       # if you have a `redirect_to` and you'd like to specify a flash message
       # then you can just pass in the `flash` or `alert` as options to the
       # `redirect_to` instead of having a separate line. Please note that this
