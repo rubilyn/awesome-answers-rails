@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+<div class="navbar-header">
+
+    <%= link_to('Home', home_path) %>
+
+    <%# we prefer the line above ð to the line below ð %>
+    <!-- <a href='/'>Home</a> -->
+    <!-- this ð will make a GET http request to `/` url -->
+
+    <%= link_to 'All Questions', questions_path %>
+
+    <%= link_to('Contact Us', contact_url) %>
+    <% if user_signed_in? %>
+      <span style='display: inline'; >Hello <%= current_user.first_name %>,</span>
+      <%= link_to 'Sign out', sessions_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign in', new_session_path %>
+      <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
+    </div> <!---end of navbar-header-->
+  </div><!---end of container-fluid-->
+</nav>

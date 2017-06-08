@@ -43,13 +43,11 @@
             has preset for that particular attribute (in this title) %>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
-      <br/>
 
       <div class="form-group">
         <%= f.label :body %>
         <%= f.text_area :body, class: 'form-control' %>
       </div>
-      <br />
       <div>
         <%= f.label :category, class: 'category_label'%>
         <%= f.collection_select :category_id,

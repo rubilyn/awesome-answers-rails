@@ -14,7 +14,7 @@ ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
-gem 'bootstrap-sass', '3.3.6'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -36,8 +36,18 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'cancancan', '~> 1.10'
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-glyphicons'
+gem 'rails-erd'
+gem 'rspec-rails', '~>3.5'
+gem 'rails-controller-testing'
+gem "font-awesome-rails"
+gem 'font-awesome-sass'
+gem 'truncate_html', '~> 0.3.2'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,7 +59,7 @@ group :development do
   gem 'interactive_editor'
   gem 'awesome_print'
   gem 'hirb'
-
+  gem 'letter_opener'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'

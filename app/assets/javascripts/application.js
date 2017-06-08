@@ -10,8 +10,13 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs 
+//= require rails-ujs
 //= require_tree .
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
+// removed require_tree from here so that bootstrap menu would work
+
 
 // require_tree will require all files including folder and sub-folders in the
 // /app/assets/javascript folder. The files will included in an alphabatical
