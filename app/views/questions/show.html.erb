@@ -1,7 +1,47 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
+
+<p>Tags: <%= @question.tags.map(&:name).join(', ') %>
+
 <p><strong>Category:</strong> <%= @question.category&.name %></p>
 <p><strong>Author:</strong> <%= @question.user&.full_name %></p>
+
+<!-- Reddit style voting UI -->
+
+<%= question_voter @question, @vote %>
+
+<!-- Reddit style voting UI -->
+
+<% if user_signed_in? && can?(:like, @question) %>
+  <% if @like %>
+    <%= link_to fa_icon('heart lg'), question_like_path(@question, @like), method: :delete %>
+  <% else %>
+    <%= link_to fa_icon('heart-o lg'), question_likes_path(@question), method: :post %>
+  <% end %>
+<% end %>
+
+(<%= pluralize @question.likes.count, 'like' %>)
+
+<% if user_signed_in? %>
+  <% if can? :edit, @question %>
+    <%= link_to 'Edit', edit_question_path(@question) %>
+  <% end %>
+
+  <%# when you use `method: :delete`. Rails will use Javascript to mimick a
+      delete request to the server %>
+
+  <%# can? is a helper method that is available in the controller and views.
+      This method came from the `cancancan` gem and it uses the `ability.rb`
+      file to know the permissions. %>
+  <% if can? :destroy, @question %>
+    <%= link_to 'Delete', question_path(@question),
+                          method: :delete,
+                          data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
+<!-- Reddit style voting UI -->
+
 
 
 <% if user_signed_in? && can?(:like, @question) %>

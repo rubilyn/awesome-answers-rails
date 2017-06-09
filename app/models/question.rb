@@ -42,6 +42,14 @@ class Question < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
+  has_many :taggings, dependent: :destroy
+  # we don't have to give has_many a source when the name of
+  # of the relationship is the same as the source
+  has_many :tags, through: :taggings
+
   validates(:title, { presence: { message: 'must be provided' },
                       uniqueness: true })
   validates(:body, { length: { minimum: 5, maximum: 1000 }})
@@ -57,6 +65,10 @@ class Question < ApplicationRecord
 
   def cap_title
     title.upcase
+  end
+
+  def vote_total
+    votes.up.count - votes.down.count
   end
 
   private

@@ -2,6 +2,7 @@ User.destroy_all
 Category.destroy_all
 Answer.destroy_all
 Question.destroy_all
+Tag.destroy_all
 
 PASSWORD = 'pass123'
 
@@ -36,5 +37,9 @@ questions.each do |q|
   end
 end
 
+10.times do
+  Tag.create name: Faker::Hipster.word
+end
+
 puts Cowsay.say 'Created 200 questions', :cow
-puts Cowsay.say "Created #{Answer.all.count} answers! 🎩", :ghostbusters
+puts Cowsay.say "Created #{Answer.all.count} answers! ð©", :ghostbusters

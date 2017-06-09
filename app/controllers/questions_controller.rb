@@ -48,19 +48,10 @@ class QuestionsController < ApplicationController
 
   def show
     @like = @question.likes.find_by(user: current_user)
+    @vote = @question.votes.find_by(user: current_user)
     @answer = Answer.new
     @answers = @question.answers.order(created_at: :desc)
   end
-
-  # in this version: if user doesnt exist, it will show all questions------> so wrong
-  # def index
-  #   @user = User.find_by(id: params[:user_id])
-  #   if @user
-  #     @questions = @user.liked_questions.order(created_at: :desc)
-  #   else
-  #     @questions = Question.recent(30)
-  #   end
-  # end
 
   def index
     if params.has_key? :user_id
@@ -104,7 +95,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit([:title, :body, :category_id])
+    params.require(:question).permit([:title, :body, :category_id, {tag_ids: []}])
   end
 
   def find_question
