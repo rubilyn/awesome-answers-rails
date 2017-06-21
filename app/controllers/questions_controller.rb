@@ -60,6 +60,19 @@ class QuestionsController < ApplicationController
     else
       @questions = Question.recent(30)
     end
+
+    # respond_to enables us to send different responses depending
+    # on the format of the request
+    respond_to do |format|
+      # `html` is the default form. In this case, render will just show
+      # the page `index.html.erb`
+      format.html { render }
+      # with every ActiveRecord object (models), there are to_json and a as_json
+      # methods that returns JSON object with every single attribute from
+      # the model. This is what `render json: @questions` will show for every question.
+      format.json { render json: @questions }
+      format.xml { render xml: @questions }
+    end
   end
 
   def edit

@@ -22,6 +22,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false },
                     format: VALID_EMAIL_REGEX
 
+  before_create :generate_api_key
   before_validation :downcase_email
 
   has_many :questions, dependent: :nullify
@@ -37,6 +38,24 @@ class User < ApplicationRecord
   end
 
   private
+
+  # You can the .send method to call private methods
+  # This should avoided in code, but useful in a pinch when
+  # when working in the console. It can also be
+  # used to dynamically call a method from a string.
+  # u = User.last
+  # u.send(:generate_api_key)
+  def generate_api_key
+
+    loop do
+      # SecureRandom.hex(32) will generate a 32 byte
+      # string of random hex characters
+      self.api_key = SecureRandom.hex(32)
+      # We then check that no user already posses that
+      # api_key. If no user has that key, exit the loop.
+      break unless User.exists?(api_key: api_key)
+    end
+  end
 
   def downcase_email
     self.email&.downcase!
