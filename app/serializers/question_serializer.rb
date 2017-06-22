@@ -5,7 +5,7 @@ class QuestionSerializer < ActiveModel::Serializer
 
   # to specify a serializer for an associated model,
   # you nest a serializer of that model inside your
-  # serializer. ð is used to serialize the answers
+  # serializer. 👇 is used to serialize the answers
   # rendered from `has_many :answers`
   class AnswerSerializer < ActiveModel::Serializer
     attributes :id, :body

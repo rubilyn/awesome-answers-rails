@@ -145,7 +145,7 @@ faraday_client $
 
 views/
 
-index.json.builder
+index.json.jbuilder
 
 
 
