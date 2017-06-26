@@ -81,21 +81,14 @@
 
 <% if user_signed_in? %>
   <%= @answer.errors.full_messages.join(', ') %>
-  <%= form_for [@question, @answer] do |f| %>
-    <%= f.text_area :body, class: 'form-control' %>
-    <br/>
-    <%= f.submit class: 'btn btn-primary' %>
-  <% end %>
+  <%= render 'answers/form', answer: @answer %>
 <% end %>
 
-<% @answers&.each do |answer| %>
-  <div>
-    <p><%= answer.body %></p>
-    <%= link_to '👌',
-      [@question, answer],
-      method: :delete,
-      data: { confirm: 'Are you sure?'}
-      %>
-    <hr />
-  </div>
-<% end %>
+<div id="answers">
+  <%# when calling render to render any template, we can pass
+  it key/value arguments where the key will be a local variable
+  inside the partial. (e.g. answers becomes a local variable of the
+  partial answers/answers with the value of @answers) %>
+  <%#= render partial: 'answers/answers', answers: @answers %>
+  <%= render 'answers/answers', answers: @answers %>
+</div>

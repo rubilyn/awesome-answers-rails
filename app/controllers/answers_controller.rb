@@ -6,11 +6,15 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = Answer.new answer_params
     @answer.question = @question
-    if @answer.save
-      AnswersMailer.notify_questions_owner(@answer).deliver_now
-      redirect_to question_path(@question), notice: 'Answer Created!'
-    else
-      render 'questions/show'
+    respond_to do |format|
+      if @answer.save
+        AnswersMailer.notify_questions_owner(@answer).deliver_later
+        format.html { redirect_to question_path(@question), notice: 'Answer Created!' }
+        format.js { render :create_success }
+      else
+        format.html { render 'questions/show' }
+        format.js { render :create_failure }
+      end
     end
   end
 
@@ -18,7 +22,11 @@ class AnswersController < ApplicationController
     @question = @answer.question
     # @question = Question.find param[:question_id]
     @answer.destroy
-    redirect_to question_path(@question), notice: 'Answer Deleted!'
+
+    respond_to do |format|
+      format.html { redirect_to question_path(@question), notice: 'Answer Deleted!' }
+      format.js { render }
+    end
   end
 
   private
