@@ -12,7 +12,11 @@ class LikesController < ApplicationController
       flash[:alert] = like.pretty_errors
     end
 
-    redirect_to question_path(question)
+    @question = question
+    respond_to do |format|
+      format.html { redirect_to question_path(question) }
+      format.js { render }
+    end
   end
 
   def destroy

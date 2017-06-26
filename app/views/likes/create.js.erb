@@ -1,0 +1,4 @@
+console.log('<%= @question.id %> was liked!');
+document
+  .querySelector('.like_button')
+  .innerHTML = "<%= j render 'like', like: @like %>";
