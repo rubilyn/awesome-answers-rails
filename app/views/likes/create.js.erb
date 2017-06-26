@@ -1,4 +1,26 @@
-console.log('<%= @question.id %> was liked!');
+// console.log('<%= @question.id %> was liked!');
+
+console.log('<%= flash[:notice] %>');
+
+document
+  .getElementById('flash-message')
+<% if flash[:notice] %>
+  .innerHTML = "<div class='alert alert-success'><%= flash[:notice] %></div>";
+<% elsif flash[:alert] %>
+  .innerHTML = "<div class='alert alert-alert'><%= flash[:alert] %></div>";
+<% end %>
+
+
+// # <% if flash[:notice] %>
+// #   document
+// #     .getElementById('flash-message')
+// #     .innerHTML = "<div class='alert alert-success'><%= flash[:notice] %></div>";
+// # <% elsif flash[:alert] %>
+// #   document
+// #     .getElementById('flash-message')
+// #     .innerHTML = "<div class='alert alert-alert'><%= flash[:alert] %></div>";
+// # <% end %>
+
 document
   .querySelector('.like_button')
   .innerHTML = "<%= j render 'like', like: @like %>";

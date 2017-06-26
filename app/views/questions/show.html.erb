@@ -10,6 +10,7 @@
 
 <%= question_voter @question, @vote %>
 
+<br/>
 <!-- Reddit style voting UI -->
 <div class="like_button">
   <%= render "likes/like", like: @like %>
@@ -49,7 +50,7 @@
 <!-- Reddit style voting UI -->
 
 
-<!-- 
+<!--
 <% if user_signed_in? && can?(:like, @question) %>
   <% if @like %>
     <%= link_to fa_icon('thumbs-up lg'), question_like_path(@question, @like), method: :delete %>
