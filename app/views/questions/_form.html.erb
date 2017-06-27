@@ -1,71 +1,57 @@
-<%# the `form_for` helper method expect you to give it an ActiveRecord object as
-    its first argument. If the object is not persisted (Question.new) then the
-    form will use the default URL to the create action in the associated
-    controller for its `action` attribute. In this case, the `action` will be
-    the url for the `create` action to `questions` controller which is
-    `questions_path` %>
+<%= @question.errors.full_messages.join(', ') %>
+<%= simple_form_for @question do |f| %>
+  <%# simple_form detects the type of the input based on the field's database
+      column type: string -> text field
+                   text -> textarea
+                   integer -> number field
+      simple_form will add a star near the label if there is presence validator
+      of the field. If you don't like that you can add `required: false`  %>
+  <%= f.input :title, required: false %>
+  <%= f.input :body %>
+  <%= f.association :tags,
+                    input_html: { multiple: true, class: 'chosen-select' }  %>
+  <%= f.association :category,
+                    include_blank: true,
+                    class: 'category_label category_selections',
+                    prompt: 'Choose a category!' %>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
 
 
-    <!-- <%= @question.errors.full_messages.join(', ') %>
-    <%= form_for @question do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%# this f.text_field will generate an `input` HTML tag with the proper
-            `name` attribute which will be `question[title]` in this case. It will
-            also set the value to the input field to whatever the @question object
-            has preset for that perticular attribute (in this title) %>
-        <%= f.text_field :title, class: 'form-control' %>
-      </div>
-      <div class="form-control">
-        <%= f.label :body %>
-        <%= f.text_area :body, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :category %>
-        <%= f.collection_select :category_id,
-          Category.all,
-          :id, # this represent the method that is used for the option tag's value
-          :name # this repesents the method that is used for the option tag's text
-          %>
-      </div>
-      <%= f.submit class: 'btn btn-primary' %>
-    <% end %> -->
+<!-- <%= @question.errors.full_messages.join(', ') %>
+<%= form_for @question do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>
+    <%# this f.text_field will generate an `input` HTML tag with the proper
+        `name` attribute which will be `question[title]` in this case. It will
+        also set the value to the input field to whatever the @question object
+        has preset for that particular attribute (in this title) %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
 
+  <div class="form-group">
+    <%= f.label :body %>
+    <%= f.text_area :body, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :tag_ids %>
+    <%= f.collection_select :tag_ids, Tag.all, :id, :name,
+      {}, { multiple: true, class: 'chosen-select' } %>
+  </div>
 
-
-    <%= @question.errors.full_messages.join(', ') %>
-    <%= form_for @question do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%# this f.text_field will generate an `input` HTML tag with the proper
-            `name` attribute which will be `question[title]` in this case. It will
-            also set the value to the input field to whatever the @question object
-            has preset for that particular attribute (in this title) %>
-        <%= f.text_field :title, class: 'form-control' %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :body %>
-        <%= f.text_area :body, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :tag_ids %>
-        <%= f.collection_select :tag_ids, Tag.all, :id, :name,
-          {}, { multiple: true, class: 'chosen-select' } %>
-      </div>
-  
-      <div>
-        <%= f.label :category, class: 'category_label'%>
-        <%= f.collection_select :category_id,
-          Category.all,
-          :id, # this represent the method that is used for the option tag's value
-          :name, # this repesents the method that is used for the option tag's text
-          include_blank: true,
-          prompt: ' Choose a category!  ',
-          class: 'category_selections form-control'
-          %>
-      </div>
-      <br/>
-      <br />
-      <%= f.submit class: 'btn btn-primary' %>
-    <% end %>
+  <div>
+    <%= f.label :category, class: 'category_label'%>
+    <%= f.collection_select :category_id,
+      Category.all,
+      :id, # this represent the method that is used for the option tag's value
+      :name, # this repesents the method that is used for the option tag's text
+      include_blank: true,
+      prompt: ' Choose a category!  ',
+      class: 'category_selections form-control'
+      %>
+  </div>
+  <br/>
+  <br />
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %> -->

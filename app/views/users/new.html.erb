@@ -4,6 +4,16 @@
 
 <h1>Sign Up</h1>
 
+<%= simple_form_for @user do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<!--
 <%= @user.errors.full_messages.join(' ') %>
 
 <%= form_for @user do |f| %>
@@ -28,4 +38,4 @@
     <%= f.password_field :password_confirmation %>
   </div>
   <%= f.submit %>
-<% end %>
+<% end %> -->

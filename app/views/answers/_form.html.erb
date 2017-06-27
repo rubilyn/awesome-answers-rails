@@ -8,10 +8,17 @@
   <%= f.submit class: 'btn btn-primary' %>
 <% end %> -->
 
+<%= simple_form_for [@question, answer], remote: true do |f| %>
+  <%= answer&.pretty_errors %>
+  <%= f.input :body %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
 
-<%= form_for [@question, answer], remote: true do |f| %>
+<!--  -->
+
+<!-- <%= form_for [@question, answer], remote: true do |f| %>
   <%= answer&.pretty_errors %>
   <%= f.text_area :body, class: 'form-control' %>
   <br/>
   <%= f.submit class: 'btn btn-primary' %>
-<% end %>
+<% end %> -->
