@@ -52,6 +52,9 @@ gem 'delayed_job_web'
 gem 'active_model_serializers'
 gem 'chosen-rails'
 gem 'simple_form'
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'fog'
 
 
 group :development, :test do
