@@ -55,6 +55,7 @@ gem 'simple_form'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog'
+gem 'friendly_id', github: 'norman/friendly_id'
 
 
 group :development, :test do

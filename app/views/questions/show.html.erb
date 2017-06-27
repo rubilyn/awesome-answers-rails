@@ -6,9 +6,9 @@
 <p><strong>Category:</strong> <%= @question.category&.name %></p>
 <p><strong>Author:</strong> <%= @question.user&.full_name %></p>
 
-<%#= image_tag @question.image.url if @question.image.present? %>
+<%= image_tag @question.image.url if @question.image.present? %>
 <%#= image_tag @question.image.url, style: "width: 300px" if @question.image.present? %>
-<%= image_tag @question.image.url(:medium) if @question.image.present? %>
+<%#= image_tag @question.image.url(:medium) if @question.image.present? %>
 <!-- Reddit style voting UI -->
 
 <%= question_voter @question, @vote %>
