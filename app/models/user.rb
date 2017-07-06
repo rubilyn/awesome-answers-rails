@@ -20,7 +20,8 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
-                    format: VALID_EMAIL_REGEX
+                    format: VALID_EMAIL_REGEX,
+                    unless: :from_omniauth?
 
   before_create :generate_api_key
   before_validation :downcase_email
@@ -32,6 +33,30 @@ class User < ApplicationRecord
 
   has_many :votes, dependent: :destroy
   has_many :voted_questions, through: :votes, source: :question
+
+  # serialize :omniauth_raw_data means that when ActiveRecord writes to
+  # this column it will transform an object into a string.
+  # When we read that column, it will transform the string back into the original
+  # object.
+  serialize :oauth_raw_data
+
+  def self.create_from_omniauth(omniauth_data)
+    full_name = omniauth_data["info"]["name"].split
+    User.create(
+      uid: omniauth_data["uid"],
+      provider: omniauth_data["provider"],
+      first_name: full_name.first,
+      last_name: full_name.last,
+      oauth_token: omniauth_data["credentials"]["token"],
+      oauth_secret: omniauth_data["credentials"]["secret"],
+      oauth_raw_data: omniauth_data,
+      password: SecureRandom.hex(32)
+    )
+  end
+
+  def self.find_from_omniauth(omniauth_data)
+    User.find_by(provider: omniauth_data["provider"], uid: omniauth_data["uid"])
+  end
 
   def full_name
     "#{first_name} #{last_name}"
@@ -59,5 +84,9 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email&.downcase!
+  end
+
+  def from_omniauth?
+    uid.present? && provider.present?
   end
 end

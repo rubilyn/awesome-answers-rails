@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get '/auth/twitter', as: :sign_in_with_twitter
+
+  get 'auth/:provider/callback' => 'callbacks#index'
+
+
+
+
+
   # /api/v1/questions
   # using the defaults: argument, we can provide a set of options
   # that will be default for every nested route.
@@ -64,7 +72,7 @@ Rails.application.routes.draw do
   # post('/questions', { to: 'questions#create', as: :questions })
   # get('/questions/:id', { to: 'questions#show', as: :question })
   # get('/questions', { to: 'questions#index' })
-  # get('/questions/:id/edit', { to: 'questions#edit', as: :edit_question })
+  # get('/questions/:id/edit' , { to: 'questions#edit', as: :edit_question })
   # patch('/questions/:id', { to: 'questions#update' })
   # delete('/questions/:id', { to: 'questions#destroy' })
 
