@@ -24,6 +24,22 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new question_params
     # @question.user_id = session[:user_id]
+
+    # If you ever get error message like so `uninitialized constant WelcomeController::Twitter`
+    # this means ruby thinks that Twitter used below is actually part of
+    # this controller class. To work around and make sure ruby considers Twitter
+    # a global constant, prefix it with ::
+    if current_user.from_omniauth?
+      client = ::Twitter::REST::Client.new do |config|
+        config.consumer_key        = ENV['TWITTER_API_KEY']
+        config.consumer_secret     = ENV['TWITTER_API_SECRET']
+        config.access_token        = current_user.oauth_token
+        config.access_token_secret = current_user.oauth_secret
+      end
+
+      client.update "#{question.title.slice(0..(question_url(question).size + 3))} - #{question_url(question)}"
+    end
+
     @question.user = current_user
     if @question.save
       QuestionReminderJob.set(wait: 5.days).perform_later(@question.id)
@@ -111,7 +127,11 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit([:title, :body, :category_id, :image, { tag_ids: [] }])
+    params.require(:question).permit([:title,
+                                      :body,
+                                      :category_id,
+                                      :image,
+                                      { tag_ids: [] }])
   end
 
   def find_question

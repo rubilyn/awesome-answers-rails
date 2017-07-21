@@ -58,6 +58,22 @@ class User < ApplicationRecord
     User.find_by(provider: omniauth_data["provider"], uid: omniauth_data["uid"])
   end
 
+  # sometimes if an oauth application changes its permissions, the User
+  # will be asked again for authorization. If this happens, the user will
+  # new oauth credentials. We need to update the user in that situation.
+  def update_oauth_credentials(omniauth_data)
+    token = omniauth_data['credentials']['token']
+    secret = omniauth_data['credentials']['secret']
+
+    if oauth_token != token || oauth_secret != secret
+      self.update oauth_token: token, oauth_secret: secret
+    end
+  end
+
+  def from_omniauth?
+    uid.present? && provider.present?
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -84,9 +100,5 @@ class User < ApplicationRecord
 
   def downcase_email
     self.email&.downcase!
-  end
-
-  def from_omniauth?
-    uid.present? && provider.present?
   end
 end

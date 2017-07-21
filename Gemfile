@@ -57,7 +57,7 @@ gem 'mini_magick'
 gem 'fog'
 gem 'friendly_id', github: 'norman/friendly_id'
 gem 'omniauth-twitter'
-
+gem 'twitter'
 
 
 group :development, :test do
